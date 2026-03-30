@@ -1,44 +1,54 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { store } from '../store';
 import { ArrowRight, Waves } from 'lucide-vue-next';
 
 const router = useRouter();
+const route = useRoute();
+const { t } = useI18n();
 
-const programmes = [
-  {
-    id: 'cold',
-    name: 'កម្រិតត្រជាក់', // Cold level
-    temp: '30°',
-    price: '6កាក់ / 6,000 រ', // 6 credits / 6000 r
-    time: '30 min',
-    class: 'btn-cold'
-  },
-  {
-    id: 'warm',
-    name: 'កម្រិតក្តៅល្មម', // Warm level
-    temp: '40°',
-    price: '7កាក់ / 7,000 រ',
-    time: '30 min',
-    class: 'btn-warm'
-  },
-  {
-    id: 'hot',
-    name: 'កម្រិតក្តៅខ្លាំង', // Hot level
-    temp: '50°',
-    price: '8កាក់ / 8,000 រ',
-    time: '30 min',
-    class: 'btn-hot'
-  }
-];
+const programmes = computed(() => {
+  return [
+    {
+      id: 'cold',
+      name: t('programmes.cold'),
+      temp: '30°',
+      price: t('programmes.priceFormat', { coins: 6, riel: '6,000' }),
+      time: '30 min',
+      class: 'btn-cold'
+    },
+    {
+      id: 'warm',
+      name: t('programmes.warm'),
+      temp: '40°',
+      price: t('programmes.priceFormat', { coins: 7, riel: '7,000' }),
+      time: '30 min',
+      class: 'btn-warm'
+    },
+    {
+      id: 'hot',
+      name: t('programmes.hot'),
+      temp: '50°',
+      price: t('programmes.priceFormat', { coins: 8, riel: '8,000' }),
+      time: '30 min',
+      class: 'btn-hot'
+    }
+  ];
+});
 
 const selectProgramme = (id: string) => {
   store.programmeId = id;
   // Final step in the provided design
-  alert(`កម្មវិធីបានជ្រើសរើសជោគជ័យ! (Programme Selected successfully!)\nService: ${store.serviceType}\nMachine: ${store.machineId}\nTemp: ${id}`);
+  alert(t('programmes.successAlert', { 
+    service: store.serviceType, 
+    machine: store.machineId, 
+    temp: id 
+  }));
   
   // Go back to home to restart flow
-  router.push('/');
+  router.push(`/${route.params.locale}`);
 };
 </script>
 
@@ -75,7 +85,7 @@ const selectProgramme = (id: string) => {
 </template>
 
 <style scoped lang="scss">
-@import '../assets/styles/_variables.scss';
+@use '../assets/styles/variables.scss' as *;
 
 .programmes-container {
   display: flex;

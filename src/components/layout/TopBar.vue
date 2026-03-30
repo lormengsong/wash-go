@@ -1,17 +1,28 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
 const route = useRoute();
 const router = useRouter();
+const { t, locale } = useI18n();
 
 const goBack = () => {
   if (route.name === 'programmes') {
-    router.push('/machines');
+    router.push(`/${locale.value}/machines`);
   } else if (route.name === 'machines') {
-    router.push('/');
+    router.push(`/${locale.value}`);
   } else {
     router.back();
   }
+};
+
+const switchLanguage = (lang: string) => {
+  const currentLocale = route.params.locale as string;
+  if (currentLocale === lang) return;
+  
+  // Swap out the locale part of the path while keeping the rest exactly identical
+  const newPath = route.fullPath.replace(new RegExp(`^/${currentLocale}`), `/${lang}`);
+  router.push(newPath).catch(() => {});
 };
 </script>
 
@@ -25,15 +36,23 @@ const goBack = () => {
     </div>
     
     <div class="language-selector">
-      <div class="lang-item active"><span class="flag"><img src="@/assets/images/lang/cambodia.svg" alt=""></span> KH</div>
-      <div class="lang-item"><span class="flag"><img src="@/assets/images/lang/english.svg" alt=""></span> EN</div>
-      <div class="lang-item"><span class="flag"><img src="@/assets/images/lang/chinese.svg" alt=""></span> CH</div>
+      <!-- Order based on user's hint: en ch kh -->
+      <div class="lang-item" :class="{ active: route.params.locale === 'kh' }" @click="switchLanguage('kh')">
+        <span class="flag"><img src="@/assets/images/lang/cambodia.svg" alt=""></span> {{ t('topbar.lang_kh') }}
+      </div>
+      <div class="lang-item" :class="{ active: route.params.locale === 'en' }" @click="switchLanguage('en')">
+        <span class="flag"><img src="@/assets/images/lang/english.svg" alt=""></span> {{ t('topbar.lang_en') }}
+      </div>
+      <div class="lang-item" :class="{ active: route.params.locale === 'ch' }" @click="switchLanguage('ch')">
+        <span class="flag"><img src="@/assets/images/lang/chinese.svg" alt=""></span> {{ t('topbar.lang_zh') }}
+      </div>
+      
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-@import '../../assets/styles/_variables.scss';
+@use '../../assets/styles/variables.scss' as *;
 
 .top-bar {
   display: flex;

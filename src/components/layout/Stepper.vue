@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { store } from '../../store';
 
 const route = useRoute();
+const { t } = useI18n();
 const currentStep = computed(() => Number(route.meta.step || 1));
 
 const steps = [1, 2, 3, 4];
 
 const stepText = computed(() => {
-  if (currentStep.value === 1) return 'ជ្រើសរើសប្រភេទសេវាកម្ម';
-  if (currentStep.value === 2) return `ម៉ាស៊ីន${store.serviceType === 'washer' ? 'បោក' : 'សម្ងួត'} > ជ្រើសរើសលេខម៉ាស៊ីន`;
-  if (currentStep.value === 3) return `ម៉ាស៊ីន${store.serviceType === 'washer' ? 'បោក' : 'សម្ងួត'} > ម៉ាស៊ីនលេខ${store.machineId} > ជ្រើសរើសកម្រិតកម្ដៅ`;
+  if (currentStep.value === 1) return t('stepper.selectService');
+  
+  const sType = store.serviceType === 'washer' ? t('stepper.washer') : t('stepper.dryer');
+  
+  if (currentStep.value === 2) return `${t('stepper.machine')}${sType} > ${t('stepper.selectMachineNum')}`;
+  if (currentStep.value === 3) return `${t('stepper.machine')}${sType} > ${t('machines.machineNum', { n: store.machineId })} > ${t('stepper.selectTemp')}`;
   return '';
 });
 
@@ -36,7 +41,7 @@ const stepText = computed(() => {
 </template>
 
 <style scoped lang="scss">
-@import '../../assets/styles/_variables.scss';
+@use '../../assets/styles/variables.scss' as *;
 
 .stepper-wrapper {
   padding: 20px;

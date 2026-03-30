@@ -1,0 +1,29 @@
+{
+  "topbar": {
+    "lang_kh": "KH",
+    "lang_en": "EN",
+    "lang_zh": "CH"
+  },
+  "stepper": {
+    "selectService": "选择服务类型",
+    "machine": "机器",
+    "washer": "洗衣",
+    "dryer": "烘干",
+    "selectMachineNum": "选择机器号码",
+    "selectTemp": "选择温度级别"
+  },
+  "home": {
+    "washer": "洗衣机",
+    "dryer": "烘干机"
+  },
+  "machines": {
+    "machineNum": "{n}号机器"
+  },
+  "programmes": {
+    "cold": "冷水洗",
+    "warm": "温水洗",
+    "hot": "热水洗",
+    "priceFormat": "{coins} 币 / {riel} R",
+    "successAlert": "程序选择成功!\n服务: {service}\n机器: {machine}\n温度: {temp}"
+  }
+}

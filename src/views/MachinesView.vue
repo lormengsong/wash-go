@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { store } from '../store';
 import { ArrowRight, Ban } from 'lucide-vue-next';
 
 const router = useRouter();
-
-// const toKhmerNum = (n: number) => n.toString().replace(/[0-9]/g, (d) => ['០','១','២','៣','៤','៥','៦','៧','៨','៩'][Number(d)]);
+const route = useRoute();
+const { t } = useI18n();
 
 // Mock machine data based on the screenshot where some are unavailable
-// Using Khmer numbers for the machine names
-const machines = ref(
-  Array.from({ length: 12 }, (_, i) => ({
+const machines = computed(() => {
+  return Array.from({ length: 12 }, (_, i) => ({
     id: `${i + 1}`,
-    name: `ម៉ាស៊ីនលេខ${i + 1}`, 
+    name: t('machines.machineNum', { n: i + 1 }), 
     available: i < 8, // Make the first 4 rows available, next ones unavailable
-  }))
-);
+  }));
+});
 
 const machineRows = computed(() => {
   const rows = [];
@@ -29,7 +29,7 @@ const machineRows = computed(() => {
 const selectMachine = (machine: { id: string; available: boolean }) => {
   if (!machine.available) return;
   store.machineId = machine.id;
-  router.push('/programmes');
+  router.push(`/${route.params.locale}/programmes`);
 };
 </script>
 
@@ -67,7 +67,7 @@ const selectMachine = (machine: { id: string; available: boolean }) => {
 </template>
 
 <style scoped lang="scss">
-@import '../assets/styles/_variables.scss';
+@use '../assets/styles/variables.scss' as *;
 
 .machines-container {
   padding: 0 16px 40px;

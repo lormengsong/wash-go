@@ -1,0 +1,29 @@
+{
+  "topbar": {
+    "lang_kh": "KH",
+    "lang_en": "EN",
+    "lang_zh": "CH"
+  },
+  "stepper": {
+    "selectService": "Select Service Type",
+    "machine": "Machine",
+    "washer": "Washer",
+    "dryer": "Dryer",
+    "selectMachineNum": "Select Machine Number",
+    "selectTemp": "Select Temperature Level"
+  },
+  "home": {
+    "washer": "Washer",
+    "dryer": "Dryer"
+  },
+  "machines": {
+    "machineNum": "Machine Number {n}"
+  },
+  "programmes": {
+    "cold": "Cold Level",
+    "warm": "Warm Level",
+    "hot": "Hot Level",
+    "priceFormat": "{coins} Coins / {riel} R",
+    "successAlert": "Programme selected successfully!\nService: {service}\nMachine: {machine}\nTemp: {temp}"
+  }
+}

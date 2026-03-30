@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { store } from '../store';
 
 const router = useRouter();
+const route = useRoute();
+const { t } = useI18n();
 
 const selectService = (type: 'washer' | 'dryer') => {
   store.serviceType = type;
-  router.push('/transition');
+  // Route to the transition screen within the current locale
+  router.push(`/${route.params.locale}/transition`);
 };
 </script>
 
@@ -24,7 +28,7 @@ const selectService = (type: 'washer' | 'dryer') => {
       </div>
       
       <div class="text-section">
-        <h2 class="title">ម៉ាស៊ីនបោក</h2>
+        <h2 class="title">{{ t('home.washer') }}</h2>
         <div class="arrows">
           <span class="arrow a1"><img src="@/assets/images/arrow/vector.svg" alt=""></span>
           <span class="arrow a2"><img src="@/assets/images/arrow/vector.svg" alt=""></span>
@@ -44,7 +48,7 @@ const selectService = (type: 'washer' | 'dryer') => {
       </div>
       
       <div class="text-section">
-        <h2 class="title">ម៉ាស៊ីនសម្ងួត</h2>
+        <h2 class="title">{{ t('home.dryer') }}</h2>
         <div class="arrows">
           <span class="arrow a1"><img src="@/assets/images/arrow/vector.svg" alt=""></span>
           <span class="arrow a2"><img src="@/assets/images/arrow/vector.svg" alt=""></span>

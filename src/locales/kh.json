@@ -1,0 +1,29 @@
+{
+  "topbar": {
+    "lang_kh": "KH",
+    "lang_en": "EN",
+    "lang_zh": "CH"
+  },
+  "stepper": {
+    "selectService": "ជ្រើសរើសប្រភេទសេវាកម្ម",
+    "machine": "ម៉ាស៊ីន",
+    "washer": "បោក",
+    "dryer": "សម្ងួត",
+    "selectMachineNum": "ជ្រើសរើសលេខម៉ាស៊ីន",
+    "selectTemp": "ជ្រើសរើសកម្រិតកម្ដៅ"
+  },
+  "home": {
+    "washer": "ម៉ាស៊ីនបោក",
+    "dryer": "ម៉ាស៊ីនសម្ងួត"
+  },
+  "machines": {
+    "machineNum": "ម៉ាស៊ីនលេខ{n}"
+  },
+  "programmes": {
+    "cold": "កម្រិតត្រជាក់",
+    "warm": "កម្រិតក្តៅល្មម",
+    "hot": "កម្រិតក្តៅខ្លាំង",
+    "priceFormat": "{coins}កាក់ / {riel} រ",
+    "successAlert": "កម្មវិធីបានជ្រើសរើសជោគជ័យ!\nសេវាកម្ម: {service}\nម៉ាស៊ីន: {machine}\nកម្ដៅ: {temp}"
+  }
+}

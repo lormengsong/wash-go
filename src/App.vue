@@ -26,7 +26,7 @@ const route = useRoute();
 </template>
 
 <style lang="scss">
-@import './assets/styles/_variables.scss';
+@use './assets/styles/variables.scss' as *;
 .mobile-container {
   background-color: #EAEEF3;
 }

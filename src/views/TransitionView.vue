@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter();
+const route = useRoute();
 
 onMounted(() => {
   // Simulate loading / step transition
   setTimeout(() => {
-    router.push('/machines');
+    router.push(`/${route.params.locale}/machines`);
   }, 1000);
 });
 </script>
@@ -23,7 +24,7 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-@import '../assets/styles/_variables.scss';
+@use '../assets/styles/variables.scss' as *;
 
 .transition-container {
   display: flex;
