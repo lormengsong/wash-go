@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { store } from '../store';
-import { ArrowRight, Ban } from 'lucide-vue-next';
+
 
 const router = useRouter();
 const route = useRoute();
